@@ -234,6 +234,17 @@ function createScopeQuestionnaire() {
     );
 
   // ───────────────────────────────────────────────────────────────────────
+  // SECTION 8 — CHAMP LIBRE FINAL
+  // ───────────────────────────────────────────────────────────────────────
+  form.addSectionHeaderItem()
+    .setTitle('8. Champ libre')
+    .setHelpText('Pour tout ce qui ne rentre dans aucune des sections précédentes.');
+
+  form.addParagraphTextItem()
+    .setTitle('Vas-y.')
+    .setHelpText('Pas de cadre, pas de prompt — c\'est à toi. Vrac, listes, anecdotes, dessins en ASCII, tout est bon.');
+
+  // ───────────────────────────────────────────────────────────────────────
   // OUTPUT URLs
   // ───────────────────────────────────────────────────────────────────────
   var formUrl = form.getPublishedUrl();

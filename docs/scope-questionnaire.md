@@ -37,6 +37,7 @@ Le contenu de [scope-questionnaire-form.gs](scope-questionnaire-form.gs) est un 
 5. **Contraintes techniques** — hosting backend, support cible (PWA / native / web), contraintes particulières.
 6. **Utilisateurs, supports, durabilité** — mono ou multi-user, supports (iPhone / iPad / Mac / Watch), criticité du backup.
 7. **V1 et ouverture libre** — top 3 features V1, et tout ce qui te passe par la tête qu'on n'a pas anticipé.
+8. **Champ libre** — zone totalement non-prompted, sans cadre, pour tout ce qui ne rentre dans aucune section.
 
 ## Ensuite
 
