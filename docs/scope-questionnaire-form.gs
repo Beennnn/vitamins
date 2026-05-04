@@ -77,7 +77,16 @@ function applyDescription(form) {
 
   form.setCollectEmail(false)
       .setLimitOneResponsePerUser(false)
-      .setShowLinkToRespondAgain(false);
+      .setShowLinkToRespondAgain(false)
+      .setRequireLogin(false);
+}
+
+function makeFormPublic() {
+  var form = FormApp.openById(EXISTING_FORM_ID);
+  form.setRequireLogin(false);
+  form.setAcceptingResponses(true);
+  Logger.log('Form rendu public — anyone with link peut répondre.');
+  Logger.log('URL : ' + form.getPublishedUrl());
 }
 
 function addAllItems(form) {
