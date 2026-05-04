@@ -77,16 +77,24 @@ function applyDescription(form) {
 
   form.setCollectEmail(false)
       .setLimitOneResponsePerUser(false)
-      .setShowLinkToRespondAgain(false)
-      .setRequireLogin(false);
+      .setShowLinkToRespondAgain(false);
 }
 
 function makeFormPublic() {
   var form = FormApp.openById(EXISTING_FORM_ID);
-  form.setRequireLogin(false);
   form.setAcceptingResponses(true);
-  Logger.log('Form rendu public — anyone with link peut répondre.');
-  Logger.log('URL : ' + form.getPublishedUrl());
+
+  // setRequireLogin n'est pas supporté pour les comptes Gmail perso —
+  // on agit côté Drive sharing à la place.
+  try {
+    var file = DriveApp.getFileById(EXISTING_FORM_ID);
+    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    Logger.log('Drive sharing : ANYONE_WITH_LINK / VIEW — public via le lien');
+  } catch (e) {
+    Logger.log('Échec setSharing : ' + e);
+  }
+
+  Logger.log('URL pour répondre : ' + form.getPublishedUrl());
 }
 
 function addAllItems(form) {
