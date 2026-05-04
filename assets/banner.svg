@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320" width="1280" height="320" role="img" aria-label="vitamins banner">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFCF3"/>
+      <stop offset="100%" stop-color="#FFE0A8"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFB55A"/>
+      <stop offset="100%" stop-color="#EE7B00"/>
+    </linearGradient>
+    <linearGradient id="teal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5BC3B6"/>
+      <stop offset="100%" stop-color="#2A8F86"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#B58CD8"/>
+      <stop offset="100%" stop-color="#7B4DAA"/>
+    </linearGradient>
+    <filter id="capShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+      <feOffset dx="0" dy="4" result="offsetblur"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.18"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="320" fill="url(#bg)"/>
+
+  <!-- decorative capsules left -->
+  <g transform="translate(120 70) rotate(25)" opacity="0.7" filter="url(#capShadow)">
+    <rect x="-50" y="-20" width="100" height="40" rx="20" ry="20" fill="url(#orange)"/>
+    <rect x="-50" y="-20" width="50" height="40" rx="20" ry="20" fill="url(#teal)"/>
+    <ellipse cx="-30" cy="-10" rx="14" ry="3" fill="#FFFFFF" opacity="0.5"/>
+  </g>
+  <g transform="translate(60 230) rotate(-15)" opacity="0.6" filter="url(#capShadow)">
+    <rect x="-40" y="-16" width="80" height="32" rx="16" ry="16" fill="url(#purple)"/>
+    <rect x="-40" y="-16" width="40" height="32" rx="16" ry="16" fill="url(#orange)"/>
+  </g>
+  <g transform="translate(220 250) rotate(30)" opacity="0.5">
+    <circle cx="0" cy="0" r="14" fill="url(#teal)"/>
+    <circle cx="-3" cy="-4" r="4" fill="#FFFFFF" opacity="0.5"/>
+  </g>
+
+  <!-- decorative capsules right -->
+  <g transform="translate(1120 80) rotate(40)" filter="url(#capShadow)">
+    <rect x="-60" y="-24" width="120" height="48" rx="24" ry="24" fill="url(#orange)"/>
+    <rect x="-60" y="-24" width="60" height="48" rx="24" ry="24" fill="url(#teal)"/>
+    <ellipse cx="-36" cy="-12" rx="16" ry="4" fill="#FFFFFF" opacity="0.5"/>
+  </g>
+  <g transform="translate(1170 220) rotate(-25)" opacity="0.7" filter="url(#capShadow)">
+    <rect x="-35" y="-14" width="70" height="28" rx="14" ry="14" fill="url(#teal)"/>
+    <rect x="-35" y="-14" width="35" height="28" rx="14" ry="14" fill="url(#purple)"/>
+  </g>
+  <g transform="translate(1050 240) rotate(20)" opacity="0.55">
+    <circle cx="0" cy="0" r="12" fill="url(#purple)"/>
+  </g>
+  <g transform="translate(1080 280) rotate(20)" opacity="0.4">
+    <circle cx="0" cy="0" r="9" fill="url(#orange)"/>
+  </g>
+
+  <!-- project name -->
+  <text x="640" y="155" text-anchor="middle"
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+        font-weight="800" font-size="100" fill="#2C2A26"
+        letter-spacing="-2">vitamins</text>
+
+  <!-- accent line -->
+  <line x1="540" y1="180" x2="740" y2="180" stroke="url(#orange)" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- tagline -->
+  <text x="640" y="225" text-anchor="middle"
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+        font-weight="500" font-size="26" fill="#5A5448">décharger la logistique des compléments alimentaires</text>
+
+  <!-- subtle micro-tagline -->
+  <text x="640" y="260" text-anchor="middle"
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+        font-weight="400" font-size="16" fill="#8A8270" letter-spacing="2">stock · agenda · pickup · notif iPhone</text>
+</svg>

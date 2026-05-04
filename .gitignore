@@ -1,0 +1,49 @@
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Logs
+*.log
+
+# Env / secrets — JAMAIS commiter
+.env
+.env.local
+.env.*.local
+*.secret
+
+# Tokens OAuth (Google Calendar, Gmail IMAP, etc.)
+credentials.json
+token.json
+*.oauth
+client_secret*.json
+
+# Credentials vendeurs (login Playwright)
+vendors.yaml
+.vendors/
+
+# Build / cache génériques
+node_modules/
+target/
+dist/
+build/
+__pycache__/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# DB locales (SQLite si retenu)
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+
+# Playwright artefacts
+playwright-report/
+test-results/
+.playwright/
