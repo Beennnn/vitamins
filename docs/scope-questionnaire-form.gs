@@ -37,6 +37,15 @@ function populateScopeQuestionnaire() {
   applyDescription(form);
   addAllItems(form);
 
+  // Rendre public via Drive sharing (setRequireLogin n'est pas supporté pour Gmail perso)
+  try {
+    DriveApp.getFileById(EXISTING_FORM_ID)
+      .setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    Logger.log('Drive sharing : ANYONE_WITH_LINK / VIEW — répondants n\'ont PAS besoin de se logger');
+  } catch (e) {
+    Logger.log('Échec setSharing : ' + e);
+  }
+
   var responseUrl = form.getPublishedUrl();
   var editUrl = form.getEditUrl();
   Logger.log('═══════════════════════════════════════════════');
