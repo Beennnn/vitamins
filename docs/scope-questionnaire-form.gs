@@ -1,13 +1,20 @@
 /**
  * vitamins — Google Apps Script générateur de questionnaire de scope
  *
+ * Deux fonctions :
+ *
+ *  - createScopeQuestionnaire() : crée un NOUVEAU Form et le remplit.
+ *  - populateScopeQuestionnaire() : remplit un Form EXISTANT (FORM_ID
+ *    en constante en tête de cette fonction) — utilise ça si tu as déjà
+ *    créé un Form vide à la main.
+ *
  * Usage :
- *   1. Ouvrir https://script.google.com/create (Chrome connecté à ton Google).
- *   2. Cmd+A puis Cmd+V pour remplacer le code par défaut par celui-ci.
+ *   1. Ouvrir https://script.google.com/create (Chrome connecté à Google).
+ *   2. Cmd+A puis Cmd+V pour remplacer le code par défaut.
  *   3. Renommer le projet "vitamins-scope-form".
- *   4. Cliquer ▶ Run (fonction `createScopeQuestionnaire`).
- *   5. Autoriser l'accès à Google Forms + Drive.
- *   6. L'URL du Form apparaît dans le panneau "Execution log" en bas.
+ *   4. Choisir la fonction (createScopeQuestionnaire ou populateScopeQuestionnaire).
+ *   5. ▶ Run → Autoriser l'accès Forms + Drive.
+ *   6. L'URL du Form apparaît dans "Execution log".
  *
  * Lien repo : https://github.com/Beennnn/vitamins
  *
@@ -16,9 +23,48 @@
  * seulement pour les forks tech clairs.
  */
 
+// ID du Form vide créé par Benoît à populate (utilisé par populateScopeQuestionnaire)
+var EXISTING_FORM_ID = '1tDnp7ddTo6JCyraTZguygs9BiCXZYbF5GbafRrc9HRI';
+
+function populateScopeQuestionnaire() {
+  var form = FormApp.openById(EXISTING_FORM_ID);
+  // Wipe existing items (au cas où un placeholder par défaut existe)
+  var existing = form.getItems();
+  for (var i = existing.length - 1; i >= 0; i--) {
+    form.deleteItem(existing[i]);
+  }
+  form.setTitle('Vitamins — questionnaire de scope');
+  applyDescription(form);
+  addAllItems(form);
+
+  var responseUrl = form.getPublishedUrl();
+  var editUrl = form.getEditUrl();
+  Logger.log('═══════════════════════════════════════════════');
+  Logger.log('FORM EXISTANT POPULÉ AVEC SUCCÈS');
+  Logger.log('═══════════════════════════════════════════════');
+  Logger.log('URL pour répondre : ' + responseUrl);
+  Logger.log('URL pour éditer   : ' + editUrl);
+  Logger.log('Repo GitHub       : https://github.com/Beennnn/vitamins');
+  Logger.log('═══════════════════════════════════════════════');
+}
+
 function createScopeQuestionnaire() {
   var form = FormApp.create('Vitamins — questionnaire de scope');
+  applyDescription(form);
+  addAllItems(form);
 
+  var responseUrl = form.getPublishedUrl();
+  var editUrl = form.getEditUrl();
+  Logger.log('═══════════════════════════════════════════════');
+  Logger.log('FORM CRÉÉ AVEC SUCCÈS');
+  Logger.log('═══════════════════════════════════════════════');
+  Logger.log('URL pour répondre : ' + responseUrl);
+  Logger.log('URL pour éditer   : ' + editUrl);
+  Logger.log('Repo GitHub       : https://github.com/Beennnn/vitamins');
+  Logger.log('═══════════════════════════════════════════════');
+}
+
+function applyDescription(form) {
   form.setDescription(
     'Questionnaire pour figer le scope de l\'outil "vitamins" — un système qui aide à gérer ' +
     'les vitamines / compléments alimentaires : suivi de stock, commandes auto-préparées (validation manuelle), ' +
@@ -32,7 +78,9 @@ function createScopeQuestionnaire() {
   form.setCollectEmail(false)
       .setLimitOneResponsePerUser(false)
       .setShowLinkToRespondAgain(false);
+}
 
+function addAllItems(form) {
   // ───────────────────────────────────────────────────────────────────────
   // SECTION 1 — TES PRODUITS AUJOURD'HUI
   // ───────────────────────────────────────────────────────────────────────
@@ -244,19 +292,4 @@ function createScopeQuestionnaire() {
     .setTitle('Vas-y.')
     .setHelpText('Pas de cadre, pas de prompt — c\'est à toi. Vrac, listes, anecdotes, dessins en ASCII, tout est bon.');
 
-  // ───────────────────────────────────────────────────────────────────────
-  // OUTPUT URLs
-  // ───────────────────────────────────────────────────────────────────────
-  var formUrl = form.getPublishedUrl();
-  var editUrl = form.getEditUrl();
-
-  Logger.log('═══════════════════════════════════════════════');
-  Logger.log('FORM CRÉÉ AVEC SUCCÈS');
-  Logger.log('═══════════════════════════════════════════════');
-  Logger.log('URL pour répondre   : ' + formUrl);
-  Logger.log('URL pour éditer     : ' + editUrl);
-  Logger.log('Repo GitHub         : https://github.com/Beennnn/vitamins');
-  Logger.log('═══════════════════════════════════════════════');
-
-  return { responseUrl: formUrl, editUrl: editUrl };
 }
