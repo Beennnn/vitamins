@@ -35,7 +35,7 @@ Le contenu de [scope-questionnaire-form.gs](scope-questionnaire-form.gs) est un 
 3. **Pickup relais colis** — flux complet d'une commande, relais habituels, source des notifs transporteur.
 4. **Comment tu imagines l'idéal** — scénario décharge mentale rêvé, niveau d'autonomie pour les achats, modalité du tap-to-log.
 5. **Contraintes techniques** — hosting backend, support cible (PWA / native / web), contraintes particulières.
-6. **Utilisateurs, supports, durabilité** — mono ou multi-user, supports (iPhone / iPad / Mac / Watch), criticité du backup.
+6. **Utilisateurs, supports, durabilité** — mono ou multi-user, OS smartphone (iOS / Android), supports (smartphone / tablette / Mac / PC / smartwatch), criticité du backup.
 7. **V1 et ouverture libre** — top 3 features V1, et tout ce qui te passe par la tête qu'on n'a pas anticipé.
 8. **Champ libre** — zone totalement non-prompted, sans cadre, pour tout ce qui ne rentre dans aucune section.
 

@@ -4,7 +4,7 @@
 
 # vitamins
 
-> Système personnel pour décharger la logistique des compléments alimentaires : suivi de stock, commandes auto-préparées (validation manuelle), rappels relais colis dans l'agenda, notifs iPhone, log quotidien des prises par tap.
+> Système personnel pour décharger la logistique des compléments alimentaires : suivi de stock, commandes auto-préparées (validation manuelle), rappels relais colis dans l'agenda, notifs smartphone (iOS / Android), log quotidien des prises par tap.
 
 ## Le problème à résoudre
 
@@ -19,7 +19,7 @@ La gestion des vitamines / compléments tient en 3 douleurs :
 - **Suit le stock** par produit, calcule la date de rupture en fonction de la dose journalière.
 - **Passe les commandes** quand la rupture approche (V1 : prépare un brouillon que je valide en 1 clic ; V2 : full auto si je l'autorise).
 - **Pose un événement dans mon agenda Google** dès qu'un colis arrive au relais : *"Récupérer [produit] chez [relais] — avant le [deadline]"*.
-- **Me notifie sur mon iPhone** : commande à passer, colis arrivé, deadline qui approche.
+- **Me notifie sur mon smartphone** (iOS ou Android selon l'utilisateur) : commande à passer, colis arrivé, deadline qui approche.
 
 Objectif : que je ne pense plus à mes vitamines tant qu'un événement n'apparaît pas dans mon agenda ou mon écran de verrouillage.
 
@@ -31,7 +31,7 @@ Voir [TASKS.md](TASKS.md) pour l'état du backlog.
 
 ## Documentation
 
-- [docs/architecture.md](docs/architecture.md) — comparaison des 3 options d'archi (PWA / backend Python / native iPhone), avec critères de décision.
+- [docs/architecture.md](docs/architecture.md) — comparaison des 3 options d'archi (PWA / backend Python / native iOS·Android), avec critères de décision.
 - [docs/integrations.md](docs/integrations.md) — design notes par intégration (Google Calendar, IMAP Gmail, HA Companion push, Playwright auto-order).
 - [docs/scope-questionnaire.md](docs/scope-questionnaire.md) — questionnaire pour figer le scope avant le premier code commit (avec Google Apps Script pour générer le Form correspondant).
 

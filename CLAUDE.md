@@ -1,6 +1,6 @@
 # vitamins — instructions Claude
 
-Outil personnel pour décharger la logistique des compléments alimentaires : suivi de stock, commandes pré-remplies (validées manuellement), calendar des pickups relais, notifs iPhone, log quotidien des prises par tap.
+Outil personnel pour décharger la logistique des compléments alimentaires : suivi de stock, commandes pré-remplies (validées manuellement), calendar des pickups relais, notifs smartphone (iOS / Android), log quotidien des prises par tap.
 
 ## Domaine en un coup d'œil
 
@@ -19,8 +19,8 @@ Outil personnel pour décharger la logistique des compléments alimentaires : su
 2. **Prédiction stockout** : moyenne glissante des `IntakeLog` (7-14 j) projette la rupture par produit.
 3. **Reorder trigger** : `stockout_date - lead_time - safety_margin = aujourd'hui` → notif "commande à passer" + ouverture d'un draft de commande.
 4. **Commande pré-remplie** : Playwright headless ouvre le site vendeur, ajoute au panier, **stoppe avant validation**, envoie un push avec lien "Valider [URL]". L'utilisateur clique = checkout.
-5. **Pickup tracking** : IMAP poll Gmail détecte "colis arrivé au relais" → Google Calendar event créé + push iPhone.
-6. **Pickup deadline** : J-3 / J-1 avant que le relais renvoie le colis → push iPhone.
+5. **Pickup tracking** : IMAP poll Gmail détecte "colis arrivé au relais" → Google Calendar event créé + push smartphone (iOS / Android).
+6. **Pickup deadline** : J-3 / J-1 avant que le relais renvoie le colis → push smartphone (iOS / Android).
 
 ## Garde-fous non négociables
 
@@ -37,7 +37,7 @@ Outil personnel pour décharger la logistique des compléments alimentaires : su
 Listées dans [docs/integrations.md](docs/integrations.md) :
 - **Google Calendar API** — events pickup
 - **IMAP Gmail** — détection "colis arrivé"
-- **HA Companion app push** — notifs iPhone (déjà installée chez Benoît)
+- **HA Companion app push** — notifs smartphone (iOS / Android) (déjà installée chez Benoît)
 - **Playwright** — pré-remplissage panier vendeur (V1 = draft, jamais full auto)
 
 ## Scope à figer

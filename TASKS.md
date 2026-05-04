@@ -3,12 +3,12 @@
 ## 🤔 Décisions à prendre AVANT le premier code commit
 
 - 🤔 **Remplir le questionnaire de scope** → cf. [docs/scope-questionnaire.md](docs/scope-questionnaire.md). Sans ça, on ne sait pas quels produits suivre, quel host, quelles intégrations prioriser. **Bloque tout le reste.**
-- 🤔 **Choisir l'architecture** → 3 options dans [docs/architecture.md](docs/architecture.md) : PWA seule / backend Python + front / native iPhone. Reco initiale = backend Python.
-- 🤔 **Choisir le canal de notif iPhone** → HA Companion (déjà installée) / Pushover / ntfy.sh / email simple.
+- 🤔 **Choisir l'architecture** → 3 options dans [docs/architecture.md](docs/architecture.md) : PWA seule / backend Python + front / app native (iOS / Android / les deux). Reco initiale = backend Python.
+- 🤔 **Choisir le canal de notif smartphone (iOS / Android)** → HA Companion (déjà installée) / Pushover / ntfy.sh / email simple.
 - 🤔 **Choisir le hosting backend** → VPS perso / Cloud Run free tier / Raspberry Pi local / autre. Lié au choix d'archi.
-- 🤔 **Décider du modèle de tap-to-log** → notif quotidienne à heure fixe / widget iPhone / page web ouverte au refresh / 3 en parallèle.
+- 🤔 **Décider du modèle de tap-to-log** → notif quotidienne à heure fixe / widget smartphone (iOS / Android) / page web ouverte au refresh / 3 en parallèle.
 - 🤔 **Mono ou multi-utilisateur** → si conjoint·e ou enfants suivent aussi des compléments, le data model change (ajout `User` + scoping).
-- 🤔 **Mono ou multi-support** → uniquement iPhone ? iPhone + web depuis Mac ? Apple Watch ? Lié au choix d'UI.
+- 🤔 **Mono ou multi-support** → smartphone seul (iOS / Android) ? smartphone + web depuis ordi ? smartwatch (Apple Watch / Wear OS) ? Lié au choix d'UI.
 - 🤔 **Backup et durabilité** → SQLite local backupé S3 ? Cloud-first (Firestore / Supabase) ? Export JSON manuel ? Tolérance perte de données ?
 
 ## ☐ V1 — modélisation domaine (après scope figé)
@@ -38,7 +38,7 @@
   → ne pas oublier d'aller chercher
 - ☐ Calendar event creator : Google Calendar API, événement "Récupérer X chez Y" avec adresse + deadline
   → décharge mentale principale
-- ☐ Push notif iPhone pour : tap reminder / reorder / arrived / deadline-soon
+- ☐ Push notif smartphone (iOS / Android) pour : tap reminder / reorder / arrived / deadline-soon
   → atteindre le user où qu'il soit
 
 ## ☐ V1 — intégrations
@@ -47,7 +47,7 @@
   → réutiliser projet `home-assistant-495021` ? À décider.
 - ☐ IMAP poll Gmail : parser emails Mondial Relay / Colissimo / Chronopost
   → détection automatique colis arrivé
-- ☐ HA Companion notify ou Pushover : push iPhone
+- ☐ HA Companion notify ou Pushover : push smartphone (iOS / Android)
   → choix selon questionnaire scope
 - ☐ Playwright pré-remplissage panier vendeur (V1 = draft, jamais auto)
   → réduire la friction au minimum, garder l'humain en boucle
@@ -62,7 +62,7 @@
 ## 🚫 V2 / V3 — différé
 
 - V2 : Multi-utilisateur (si conjoint·e suit aussi des compléments)
-- V2 : Apple Watch complication (tap depuis le poignet)
+- V2 : Smartwatch complication (Apple Watch ou Wear OS — tap depuis le poignet)
 - V2 : Comparaison prix multi-vendeur en temps réel
 - V3 : Conso ajustée par feedback "j'ai sauté un jour" / "j'ai pris une dose double"
 - V3 : Wrap PWA → App Store via PWABuilder

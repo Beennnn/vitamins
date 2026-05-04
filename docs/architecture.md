@@ -2,28 +2,29 @@
 
 3 options sur la table. Aucune n'est tranchée. Ce doc liste les options + critères pour choisir.
 
-## Option A — PWA installable iPhone
+## Option A — PWA installable (iOS et Android)
 
 **Stack** : Angular 21 (zoneless, signals — cohérent avec [iris-ui](https://gitlab.com/iris-7/iris-ui)) + IndexedDB local + Service Worker pour push Web.
 
 **Pour** :
 - Pas de backend = pas de coût d'hébergement.
-- Installable sur iPhone via "Add to Home Screen" — feel d'app native.
+- Installable via "Add to Home Screen" sur iOS ET Android — feel d'app native.
+- Android supporte mieux les Service Workers que iOS (background sync plus fiable, push web stable).
 - Tout reste sur l'appareil = privacy ++.
 
 **Contre** :
 - **Pas d'auto-order** : un service worker peut pas faire de Playwright headless.
-- **Pas d'IMAP poll** : un service worker peut pas tourner H24, et même les periodic background sync iOS sont aléatoires.
+- **Pas d'IMAP poll** : sur iOS les periodic background sync sont aléatoires ; sur Android légèrement mieux mais Doze mode reste un risque H24.
 - **Pas de calendar create depuis le phone seul** facilement — OAuth flow Google sans backend = friction utilisateur sévère.
 
-→ Adapté si Benoît accepte de **passer les commandes manuellement** et **forwarder les emails relais à la main**. Pas vrai V1 décharge mentale.
+→ Adapté si l'utilisateur accepte de **passer les commandes manuellement** et **forwarder les emails relais à la main**. Pas vrai V1 décharge mentale.
 
 ## Option B — Backend Python + frontend mobile-first
 
 **Stack** : FastAPI + SQLite + APScheduler (cron jobs in-process) + frontend Angular ou simple HTML+HTMX.
 
 **Pour** :
-- **Toutes les features faisables** : auto-order draft Playwright, IMAP poll, Google Calendar API server-to-server, push iPhone via HA Companion.
+- **Toutes les features faisables** : auto-order draft Playwright, IMAP poll, Google Calendar API server-to-server, push smartphone (iOS via APNs, Android via FCM) via HA Companion qui gère les deux.
 - Cron natif pour les daily checks (stockout, deadline approche).
 - Stack alignée avec [iris-service-python](https://gitlab.com/iris-7/iris-service-python) — Benoît la connaît.
 - Backup centralisé facile (SQLite → S3 quotidien).
@@ -34,22 +35,24 @@
 
 → Adapté si Benoît est OK pour héberger ~24/7. **Recommandé pour V1** car débloque toutes les features.
 
-## Option C — App native iPhone
+## Option C — App native (iOS et/ou Android)
 
-**Stack** : SwiftUI (Xcode) ou Flutter ou React Native.
+**Stack** : SwiftUI (iOS) + Kotlin Compose (Android), ou un framework cross-platform : Flutter, React Native, KMP (Kotlin Multiplatform).
 
 **Pour** :
-- Notifs natives = meilleure expérience.
-- Accès direct à Apple Calendar (pas besoin de Google).
-- Apple Watch complication possible nativement.
+- Notifs natives APNs (iOS) / FCM (Android) = meilleure expérience.
+- Accès direct au calendrier natif (Apple Calendar / Google Calendar Android).
+- Smartwatch complication possible nativement (Apple Watch / Wear OS).
+- Background work plus permissif sur Android (foreground service) — IMAP poll local possible.
 
 **Contre** :
-- Apple Developer Account : **99 $/an**.
-- Cycles de revue App Store si distribué.
-- Idem option A : sans backend, pas d'auto-order ni d'IMAP poll. → Hybride C + backend = lourd.
-- Friction de déploiement énorme pour un outil perso (Xcode, signing, TestFlight).
+- **iOS** : Apple Developer Account 99 $/an, cycles de revue App Store, Xcode + Mac requis.
+- **Android** : Google Play Developer fee 25 $ one-shot (moins cher), revue plus rapide, mais Doze mode + Battery Optimizer limitent quand même les jobs background.
+- **Cross-platform** (Flutter / RN / KMP) : économise un dev par stack, mais perd du natif côté OS-spécifique (notif actions, Watch).
+- Idem option A : sans backend, l'auto-order Playwright n'existe pas en local. → Hybride C + backend = lourd.
+- Friction de déploiement énorme pour un outil perso (signing, store account, TestFlight / internal testing).
 
-→ Pas adapté pour V1. Peut-être V2 si l'outil prend de l'ampleur ou si on veut Apple Watch.
+→ Pas adapté pour V1. Peut-être V2 si l'outil prend de l'ampleur ou si la smartwatch devient un must.
 
 ## Critères de décision
 
@@ -58,13 +61,13 @@
 | Auto-order draft (Playwright) | ❌ | ✅ | ❌ (sans backend) |
 | IMAP poll (détection colis) | ❌ | ✅ | ❌ (sans backend) |
 | Google Calendar event create | 🟡 (OAuth lourd) | ✅ | 🟡 |
-| Push iPhone | 🟡 (Web Push) | ✅ (HA Companion / Pushover) | ✅ (APNs natif) |
+| Push smartphone (iOS+Android) | 🟡 (Web Push — limité iOS) | ✅ (HA Companion APNs+FCM, Pushover) | ✅ (APNs / FCM natifs) |
 | Coût hosting | 0 | €3-5/mo ou free tier | 99 $/an |
 | Friction déploiement | basse | moyenne | haute |
 | Time-to-V1 | ~2 semaines (mais V1 dégradé) | ~3-4 semaines | ~6-8 semaines |
 | Backup données | 🟡 (export JSON manuel) | ✅ (SQLite → S3 cron) | 🟡 (iCloud sync) |
 | Multi-utilisateur | 🟡 (chacun son device) | ✅ (server-side) | 🟡 (chacun son device) |
-| Apple Watch | ❌ | ❌ direct, ✅ via PWA wrap | ✅ |
+| Smartwatch (Apple Watch / Wear OS) | ❌ | ❌ direct | ✅ (natif iOS et Android) |
 
 ## Recommandation initiale
 

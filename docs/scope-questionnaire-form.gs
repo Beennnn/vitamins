@@ -77,7 +77,7 @@ function applyDescription(form) {
   form.setDescription(
     'Questionnaire pour figer le scope de l\'outil "vitamins" — un système qui aide à gérer ' +
     'les vitamines / compléments alimentaires : suivi de stock, commandes auto-préparées (validation manuelle), ' +
-    'pickup relais colis dans l\'agenda, notifs iPhone, log quotidien des prises par tap.\n\n' +
+    'pickup relais colis dans l\'agenda, notifs smartphone (iOS et/ou Android), log quotidien des prises par tap.\n\n' +
     'Repo : https://github.com/Beennnn/vitamins\n\n' +
     'L\'idée n\'est PAS de cocher des cases mais de raconter en mots libres ce qui te prend la tête ' +
     'aujourd\'hui et comment tu rêverais que ça se passe. Compte ~15 minutes. ' +
@@ -212,8 +212,9 @@ function addAllItems(form) {
   form.addParagraphTextItem()
     .setTitle('Pour le tap-to-log quotidien (confirmer "j\'ai pris X aujourd\'hui"), tu vois ça comment ?')
     .setHelpText(
-      'Notif iPhone avec quick-action ? Page web ouverte le matin ? Widget sur l\'écran d\'accueil ? ' +
-      'Apple Watch ? Combinaison ? Ou tu n\'en veux pas et tu préfères que le système devine seul ?'
+      'Notif smartphone (iOS ou Android) avec quick-action ? Page web ouverte le matin ? ' +
+      'Widget sur l\'écran d\'accueil ? Smartwatch (Apple Watch / Wear OS) ? Combinaison ? ' +
+      'Ou tu n\'en veux pas et tu préfères que le système devine seul ?'
     );
 
   // ───────────────────────────────────────────────────────────────────────
@@ -236,9 +237,11 @@ function addAllItems(form) {
   form.addMultipleChoiceItem()
     .setTitle('Tu veux le système où ?')
     .setChoiceValues([
-      'Web app dans le navigateur iPhone',
-      'PWA installable iPhone (ajout à l\'écran d\'accueil)',
-      'App native iPhone',
+      'Web app dans le navigateur du smartphone (iOS ou Android)',
+      'PWA installable (ajout à l\'écran d\'accueil — iOS et Android)',
+      'App native iOS uniquement',
+      'App native Android uniquement',
+      'App native iOS + Android',
       'Plusieurs supports en parallèle',
       'Pas d\'avis, recommande-moi'
     ])
@@ -273,12 +276,26 @@ function addAllItems(form) {
     .setHelpText('Stocks séparés ? Notifs séparées ? Allowlist d\'achat partagée ?');
 
   form.addCheckboxItem()
+    .setTitle('Quel(s) OS de smartphone vont accéder au système ?')
+    .setChoiceValues([
+      'iOS (iPhone)',
+      'Android',
+      'Les deux selon les utilisateurs',
+      'Pas sûr / pas important'
+    ])
+    .setRequired(false);
+
+  form.addCheckboxItem()
     .setTitle('Sur quels supports tu veux y accéder ?')
     .setChoiceValues([
-      'iPhone (web ou app)',
-      'iPad',
-      'Mac (Chrome / Safari)',
-      'Apple Watch',
+      'Smartphone iOS (iPhone)',
+      'Smartphone Android',
+      'Tablette iPad',
+      'Tablette Android',
+      'Mac',
+      'PC (Windows / Linux)',
+      'Smartwatch Apple Watch',
+      'Smartwatch Wear OS (Android)',
       'Aucun, juste les notifs me suffisent'
     ])
     .setRequired(false);

@@ -45,11 +45,11 @@
 
 **Alternative low-tech** : adresse Gmail dédiée + filtre Gmail "transférer à un endpoint" + webhook backend. Plus simple si on tolère 1× /h de latence.
 
-## 3. HA Companion app — push iPhone
+## 3. HA Companion app — push smartphone (iOS et Android)
 
-**But** : notifs sur l'iPhone de Benoît pour : reorder à faire, colis arrivé, deadline approchant, tap reminder daily, validation order.
+**But** : notifs sur le smartphone de chaque utilisateur pour : reorder à faire, colis arrivé, deadline approchant, tap reminder daily, validation order. Marche aussi bien sur iOS (APNs) que sur Android (FCM) — l'app Companion HA est cross-platform.
 
-**Approche** : Home Assistant a `notify.mobile_app_<device>` qui pousse direct via APNs. L'app Companion est déjà installée chez Benoît (cf. `feedback_no_test_via_real_actions.md` en memory).
+**Approche** : Home Assistant a `notify.mobile_app_<device>` qui pousse direct via APNs (iOS) ou FCM (Android) — c'est transparent côté serveur, le device_id détermine le canal. L'app Companion est déjà installée chez Benoît côté iOS (cf. `feedback_no_test_via_real_actions.md` en memory). Pour un répondant Android, il suffit d'installer la même app (gratuite sur Play Store) et de la connecter au même HA.
 
 **API** : POST sur `https://<ha-url>/api/services/notify/mobile_app_<device>` :
 ```json
@@ -95,7 +95,7 @@
 3. Naviguer jusqu'à la page panier.
 4. Capturer l'URL du panier (souvent persistée à la session login).
 5. Logout.
-6. Push iPhone : "Panier prêt — Valider en 1 clic [URL]".
+6. Push smartphone (iOS / Android) : "Panier prêt — Valider en 1 clic [URL]".
 7. **Stop**. L'humain finalise.
 
 **Risque** : changement UI du site vendeur = script cassé. Stratégie :
